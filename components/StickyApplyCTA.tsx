@@ -5,11 +5,11 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function StickyApplyCTA() {
-  const [showDesktop, setShowDesktop] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setShowDesktop(window.scrollY > window.innerHeight * 0.7);
+      setShow(window.scrollY > window.innerHeight * 0.7);
     };
     onScroll();
     window.addEventListener("scroll", onScroll);
@@ -19,7 +19,7 @@ export default function StickyApplyCTA() {
   return (
     <>
       <AnimatePresence>
-        {showDesktop ? (
+        {show ? (
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -36,14 +36,24 @@ export default function StickyApplyCTA() {
         ) : null}
       </AnimatePresence>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white/95 p-3 backdrop-blur lg:hidden">
-        <Link
-          href="#apply"
-          className="block rounded-full bg-orange px-5 py-3 text-center text-base font-black text-white"
-        >
-          応募する
-        </Link>
-      </div>
+      <AnimatePresence>
+        {show ? (
+          <motion.div
+            initial={{ y: 60, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 60, opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white/95 p-3 backdrop-blur lg:hidden"
+          >
+            <Link
+              href="#apply"
+              className="block rounded-full bg-orange px-5 py-3 text-center text-base font-black text-white"
+            >
+              応募する
+            </Link>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }
