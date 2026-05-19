@@ -16,7 +16,7 @@ export default function Header() {
             src="/images/fv-logo.png"
             alt="有限会社エフアイティ"
             width={160}
-            height={64}
+            height={62}
             priority
           />
         </Link>
