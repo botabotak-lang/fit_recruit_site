@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:xserver": "BUILD_TARGET=xserver next build",
     "start": "next start",
     "lint": "next lint"
   },
